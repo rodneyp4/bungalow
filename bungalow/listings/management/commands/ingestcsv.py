@@ -27,8 +27,8 @@ class Command(BaseCommand):
             try:
                 obj = Listing()
                 for i, field in enumerate(row):
-                    if field == '' and isinstance(model_fields[i+1], models.DateField):
-                        field = None
+                    # FloatField doesn't handle serializing empty string too well, convert to 0 instead
+                    # model_fields has one more `id` field than the csv fields, so i+1 here 
                     if field == '' and isinstance(model_fields[i+1], models.FloatField):
                         field = 0
                     setattr(obj, fields_name[i], field)

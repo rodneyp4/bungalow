@@ -1,13 +1,14 @@
 from django.db import models
 from datetime import datetime
 
-# Create your models here.
 class CustomizedDateField(models.DateField):
     def to_python(self, value):
         if value is '':
             return None
         if value is None:
             return value
+        # It seems django DateField model only supports one date format
+        # Manually convert here
         value = datetime.strptime(value, '%m/%d/%Y').strftime('%Y-%m-%d')
         return super(CustomizedDateField, self).to_python(value)
 
@@ -39,25 +40,25 @@ class Listing(models.Model):
     choices=AREA_UNIT_CHOICES,
     default=SQFT,
   )
-  bathrooms = models.FloatField(blank=True)
-  bedrooms = models.FloatField(blank=True)
-  home_size = models.FloatField(blank=True)
+  bathrooms = models.FloatField(null=True)
+  bedrooms = models.FloatField(null=True)
+  home_size = models.FloatField(null=True)
   home_type = models.CharField(
     max_length=30,
     choices=HOME_TYPE_CHOICES,
   )
   last_sold_date = CustomizedDateField(blank=True, null=True)
-  last_sold_price = models.FloatField(blank=True)
+  last_sold_price = models.FloatField(null=True)
   link = models.URLField(blank=True)
   price = models.CharField(blank=True, max_length=30)
-  property_size = models.FloatField(blank=True)
-  rent_price = models.FloatField(blank=True)
-  rentzestimate_amount = models.FloatField(blank=True)
+  property_size = models.FloatField(null=True)
+  rent_price = models.FloatField(null=True)
+  rentzestimate_amount = models.FloatField(null=True)
   rentzestimate_last_updated = CustomizedDateField(blank=True, null=True)
-  tax_value = models.FloatField(blank=True)
-  tax_year = models.FloatField(blank=True)
-  year_built = models.FloatField(blank=True)
-  zestimate_amount = models.FloatField(blank=True)
+  tax_value = models.FloatField(null=True)
+  tax_year = models.FloatField(null=True)
+  year_built = models.FloatField(null=True)
+  zestimate_amount = models.FloatField(null=True)
   zestimate_last_updated = CustomizedDateField(blank=True, null=True)
   zillow_id = models.CharField(max_length=30)
   address = models.CharField(max_length=30)
