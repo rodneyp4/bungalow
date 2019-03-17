@@ -4,8 +4,8 @@ from rest_framework.urlpatterns import format_suffix_patterns
 from bungalow.listings import views
 
 urlpatterns = [
-    path('listings/', views.ListingList.as_view()),
-    path('listings/<int:pk>/', views.ListingDetail.as_view()),
+    path('listings', views.ListingList.as_view()),
+    path('listings/<int:pk>', views.ListingDetail.as_view()),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

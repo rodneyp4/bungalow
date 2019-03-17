@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.urls import include, path
 
+API_PREFIX = 'api/v1/'
+
 urlpatterns = [
-    path('', include('bungalow.listings.urls')),
+    path(API_PREFIX, include('bungalow.listings.urls')),
 ]

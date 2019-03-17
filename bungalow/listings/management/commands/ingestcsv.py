@@ -14,11 +14,11 @@ class Command(BaseCommand):
         parser.add_argument('csv_file', type=argparse.FileType('r'))
 
     def handle(self, *args, **options):
-        csvFile = options['csv_file']
+        csvfile = options['csv_file']
 
         model_fields = Listing._meta.fields
         fields_name = []
-        reader = csv.reader (csvFile, delimiter=',')
+        reader = csv.reader (csvfile, delimiter=',')
         fields_name = next(reader)
         for i, _ in enumerate(fields_name):
             fields_name[i] = fields_name[i].lower ()
