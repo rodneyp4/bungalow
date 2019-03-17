@@ -13,6 +13,9 @@ $ python manage.py runserver
 $ python manage.py ingestcsv challenge_data.csv
 ```
 
+## API Docs
+[See here](api.v1.md)
+
 ---
 
 ## My Notes
